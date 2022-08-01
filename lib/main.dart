@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:project3/Kategoriler.dart';
+import 'package:project3/categories.dart';
 import 'package:project3/my_theme.dart';
 import 'MainPageHome.dart';
 import 'constants.dart';
-import 'UrunInfo.dart';
+import 'product_details.dart';
 
 void main() {
   runApp(MainPage());
@@ -23,7 +23,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: light == true ? MyTheme().myThemeLight : MyTheme().myThemeDark,
+      theme:MyTheme().myThemeLight,
       debugShowCheckedModeBanner: false,
       home: MainPageHome(),
     );

@@ -3,8 +3,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:project3/UrunInfo.dart';
-import 'UrunInfo.dart';
+import 'package:project3/product_details.dart';
+import 'product_details.dart';
 
 class YorumEkle extends StatefulWidget {
 

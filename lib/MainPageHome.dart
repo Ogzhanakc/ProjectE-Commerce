@@ -1,16 +1,20 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:project3/Kategoriler.dart';
-import 'package:project3/Sepetim.dart';
-import 'package:project3/UrunInfo.dart';
+import 'package:project3/add_comment.dart';
+import 'package:project3/categories.dart';
+import 'package:project3/basket.dart';
+import 'package:project3/product_details.dart';
 import 'package:project3/constants.dart';
-import 'AnaSayfa.dart';
+import 'package:project3/products.dart';
+import 'package:project3/profile.dart';
+import 'main_page.dart';
 import 'constants.dart';
+import 'models/basket_model.dart';
 import 'my_theme.dart';
 
 class MainPageHome extends StatefulWidget {
-  const MainPageHome({Key? key}) : super(key: key);
+
 
   @override
   State<MainPageHome> createState() => _MainPageHomeState();
@@ -18,16 +22,20 @@ class MainPageHome extends StatefulWidget {
 
 class _MainPageHomeState extends State<MainPageHome> {
   @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+  }
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         bottomNavigationBar: menu(),
         body: TabBarView(
           children: [
-
             Categories(),
-            Sepetim(),
+            MyBasket(),
+            Profile(),
           ],
         ),
       ),
@@ -36,25 +44,25 @@ class _MainPageHomeState extends State<MainPageHome> {
 }
 
 Widget menu() {
-  return Container(
-
-    child: TabBar(
-      // labelColor: MyTheme().myThemeLight.primaryColor,
-      // unselectedLabelColor: Colors.black,
-      // indicatorSize: TabBarIndicatorSize.tab,
-      // indicatorPadding: EdgeInsets.all(5.0),
-      //indicatorColor: Colors.purple,
-      tabs: [
-
-        Tab(
-          text: "Kategoriler",
-          icon: Icon(Icons.category),
-        ),
-        Tab(
-          text: "Sepetim",
-          icon: Icon(Icons.shopping_cart),
-        ),
-      ],
-    ),
+  return TabBar(
+    // labelColor: MyTheme().myThemeLight.primaryColor,
+    // unselectedLabelColor: Colors.black,
+    // indicatorSize: TabBarIndicatorSize.tab,
+    // indicatorPadding: EdgeInsets.all(5.0),
+    //indicatorColor: Colors.purple,
+    tabs: [
+      Tab(
+        text: "Kategoriler",
+        icon: Icon(Icons.category),
+      ),
+      Tab(
+        text: "Sepetim",
+        icon: Icon(Icons.shopping_cart),
+      ),
+      Tab(
+        text: "Profil",
+        icon: Icon(Icons.person),
+      ),
+    ],
   );
 }

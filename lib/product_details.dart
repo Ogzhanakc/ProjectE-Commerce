@@ -1,78 +1,84 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
-import 'package:project3/Sepetim.dart';
-import 'package:project3/YorumEkle.dart';
+import 'package:project3/MainPageHome.dart';
+import 'package:project3/basket.dart';
+import 'package:project3/add_comment.dart';
+import 'package:project3/models/basket_model.dart';
 import 'constants.dart';
 import 'my_theme.dart';
 
 int sayi = 1;
 
-class UrunInfo extends StatefulWidget {
-  @override
-  State<UrunInfo> createState() => _UrunInfoState();
-}
-bool light=true;
-class _UrunInfoState extends State<UrunInfo> {
-  List<Widget> finalList = [];
+class ProductDetail extends StatefulWidget {
+  String? productName;
+  String? image;
+  String? price;
+  int? id;
+  String? productCode;
+  String? sortDescription;
 
+  ProductDetail(
+      {this.productName,
+      this.image,
+      this.price,
+      this.productCode,
+      this.sortDescription});
+
+  @override
+  State<ProductDetail> createState() => _ProductDetailState();
+}
+
+class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ürün ismi"),
+        title: Text(widget.productName!),
         actions: [
-          Switch(value: light, onChanged: (state){
-            setState((){
-              light = state;
-            });
-          }),
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => Sepetim(),
+                  builder: (context) => MyBasket(),
                 ));
               },
-              icon: Icon(Icons.shopping_cart)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.share)),
+              icon: const Icon(Icons.shopping_cart)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
         ],
       ),
       body: Container(
         alignment: Alignment.center,
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: ListView(
             //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                child: Image.asset("images/hazirlaniyor.jpeg"),
+                child: Image.network(widget.image!),
               ),
               sizedBox(),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.rectangle,
                 ),
                 child: Column(
                   children: [
-                    Text("Ürün ismi"),
-                    Text("Ürün kodu"),
-                    Text(
-                      "*****",
-                    )
+                    Text(widget.productName!),
+                    Text(widget.productCode!),
                   ],
                 ),
               ),
               sizedBox(),
+              Text(widget.sortDescription!),
+              sizedBox(),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.rectangle,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Miktar",
                       style: styleWithYellow,
                     ),
@@ -86,7 +92,7 @@ class _UrunInfoState extends State<UrunInfo> {
                                 }
                               });
                             },
-                            icon: Icon(Icons.remove)),
+                            icon: const Icon(Icons.remove)),
                         Text(sayi.toString()),
                         IconButton(
                             onPressed: () {
@@ -94,7 +100,7 @@ class _UrunInfoState extends State<UrunInfo> {
                                 sayi++;
                               });
                             },
-                            icon: Icon(Icons.add)),
+                            icon: const Icon(Icons.add)),
                       ],
                     )
                   ],
@@ -106,7 +112,7 @@ class _UrunInfoState extends State<UrunInfo> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Hiç Yorum yok",
                       style: styleWithYellow,
                     ),
@@ -117,7 +123,7 @@ class _UrunInfoState extends State<UrunInfo> {
                         ));
                       },
                       child: Row(
-                        children: [
+                        children: const [
                           Text(
                             "Yorum Ekle",
                             style: styleWithYellow,
@@ -134,7 +140,6 @@ class _UrunInfoState extends State<UrunInfo> {
               ),
               //Yorumların ekleneceği yer
               sizedBox(),
-              for (int i = 0; i < list.length; i++) list[i],
             ],
           ),
         ),
@@ -142,7 +147,7 @@ class _UrunInfoState extends State<UrunInfo> {
       //--------------------------------------
       //Alttaki butonların bulunduğu row.
       bottomSheet: Padding(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           left: 5,
           right: 5,
         ),
@@ -151,6 +156,21 @@ class _UrunInfoState extends State<UrunInfo> {
           children: [
             Expanded(
               child: GestureDetector(
+                //sepete elemanı push etme işlemi burada
+                onTap: () {
+                  print("butona tıklandı");
+
+                  //Navigator.of(context).push(MaterialPageRoute(
+                  //builder: (context) => MyBasket(model: BasketModel(image: widget.image, productName: widget.productName, price: widget.price, productCode: widget.productCode, quantity:sayi.toString()))));
+
+                  MyBasket.of(context)?.basketlist?.add(BasketModel(
+                      image: widget.image,
+                      productName: widget.productName,
+                      price: widget.price,
+                      productCode: widget.productCode,
+                      quantity: sayi.toString()));
+                  //print(MyBasket.of(context)?.products.length);
+                },
                 child: Container(
                   height: 50,
                   decoration: BoxDecoration(
@@ -176,17 +196,23 @@ class _UrunInfoState extends State<UrunInfo> {
             ),
             Expanded(
               child: GestureDetector(
+                onTap: () {
+                  print("butona tıklandı");
+
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => MyBasket()));
+                },
                 child: Container(
-                  margin: EdgeInsets.only(left: 5),
+                  margin: const EdgeInsets.only(left: 5),
                   height: 50,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: customYellow,
                     shape: BoxShape.rectangle,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                    children: const [
                       Icon(
                         Icons.shopping_bag_outlined,
                         size: iconSize,
@@ -219,5 +245,5 @@ class _UrunInfoState extends State<UrunInfo> {
 }
 
 SizedBox sizedBox() {
-  return SizedBox(height: 10);
+  return const SizedBox(height: 10);
 }

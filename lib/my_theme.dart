@@ -66,10 +66,10 @@ class MyTheme {
           surface: Colors.white,
           onSurface: Colors.white));
 
-  TextTheme textTheme = TextTheme().copyWith(
+  TextTheme textTheme = const TextTheme().copyWith(
       bodyText1:
-          TextStyle(color: customYellow, fontSize: 20.0, fontFamily: "Italic"),
-      bodyText2: TextStyle(
+          const TextStyle(color: customYellow, fontSize: 20.0, fontFamily: "Italic"),
+      bodyText2: const TextStyle(
         color: Colors.white,
         fontSize: 20,
       ));
