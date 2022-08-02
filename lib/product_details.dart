@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:project3/MainPageHome.dart';
 import 'package:project3/basket.dart';
 import 'package:project3/add_comment.dart';
 import 'package:project3/models/basket_model.dart';
 import 'constants.dart';
+import 'main.dart';
 import 'my_theme.dart';
 
-int sayi = 1;
+int quantity = 1;
+List<BasketModel> sendBasket = [];
 
 class ProductDetail extends StatefulWidget {
   String? productName;
@@ -40,8 +41,21 @@ class _ProductDetailState extends State<ProductDetail> {
                   builder: (context) => MyBasket(),
                 ));
               },
-              icon: const Icon(Icons.shopping_cart)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
+              icon: sendBasket.isNotEmpty
+                  ? Stack(
+                      children: const [
+                        Icon(Icons.shopping_cart_outlined),
+                        Positioned(
+                          left: 15.0,
+                          child: Icon(
+                            Icons.brightness_1,
+                            size: 10.0,
+                            color: Colors.red,
+                          ),
+                        )
+                      ],
+                    )
+                  : const Icon(Icons.shopping_cart_outlined)),
         ],
       ),
       body: Container(
@@ -49,7 +63,6 @@ class _ProductDetailState extends State<ProductDetail> {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: ListView(
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 child: Image.network(widget.image!),
@@ -87,17 +100,17 @@ class _ProductDetailState extends State<ProductDetail> {
                         IconButton(
                             onPressed: () {
                               setState(() {
-                                if (sayi > 1) {
-                                  sayi--;
+                                if (quantity > 1) {
+                                  quantity--;
                                 }
                               });
                             },
                             icon: const Icon(Icons.remove)),
-                        Text(sayi.toString()),
+                        Text(quantity.toString()),
                         IconButton(
                             onPressed: () {
                               setState(() {
-                                sayi++;
+                                quantity++;
                               });
                             },
                             icon: const Icon(Icons.add)),
@@ -154,22 +167,24 @@ class _ProductDetailState extends State<ProductDetail> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Container(
+              child: Text(
+                widget.price!,
+                style: TextStyle(),
+              ),
+            ),
             Expanded(
               child: GestureDetector(
-                //sepete elemanı push etme işlemi burada
                 onTap: () {
-                  print("butona tıklandı");
-
-                  //Navigator.of(context).push(MaterialPageRoute(
-                  //builder: (context) => MyBasket(model: BasketModel(image: widget.image, productName: widget.productName, price: widget.price, productCode: widget.productCode, quantity:sayi.toString()))));
-
-                  MyBasket.of(context)?.basketlist?.add(BasketModel(
+                  sendBasket.add(BasketModel(
                       image: widget.image,
                       productName: widget.productName,
                       price: widget.price,
                       productCode: widget.productCode,
-                      quantity: sayi.toString()));
-                  //print(MyBasket.of(context)?.products.length);
+                      quantity: quantity.toString()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => MainPage()));
+                  quantity = 1;
                 },
                 child: Container(
                   height: 50,
@@ -194,7 +209,21 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
               ),
             ),
-            Expanded(
+          ],
+        ),
+      ),
+      //--------------------------------------
+    );
+  }
+}
+
+SizedBox sizedBox() {
+  return const SizedBox(height: 10);
+}
+
+//satın al butonu
+/*
+Expanded(
               child: GestureDetector(
                 onTap: () {
                   print("butona tıklandı");
@@ -227,23 +256,4 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-      //--------------------------------------
-    );
-
-    //APPBAR
-    //ÜRÜN RESMİ
-    //ÜRÜN İSMİ
-    //ÜRÜN KODU
-    //YILDIZ
-    //MİKTARI
-    //YORUM EKLEME
-    //SEPETE EKLE VE SATIN AL BUTONU.
-  }
-}
-
-SizedBox sizedBox() {
-  return const SizedBox(height: 10);
-}
+ */

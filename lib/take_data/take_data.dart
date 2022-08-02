@@ -7,6 +7,8 @@ import 'package:project3/models/products_detail_model.dart';
 import 'package:project3/models/products_model.dart';
 
 class TakeData {
+
+
   Future<List<CategoriesModel>> getCategories() async {
     var response = await http
         .get(Uri.parse("https://b2bdemo.mrpyazilim.com/api/get_categories"));
@@ -17,11 +19,20 @@ class TakeData {
     return categories;
   }
 
-  Future<List<ProductsModel>> getProducts(String category) async {
-    Map<String, dynamic> map = {
+  Future<List<ProductsModel>> getProducts(String category ,String searchText) async {
+    Map<String, dynamic> map;
+    if(searchText !="" && category ==""){
+     map =  {
+        "order_by": "desc",
+        "search" : searchText
+      };
+    }else{
+    map = {
       "category": category,
       "order_by": "desc",
     };
+    }
+
     Uri uri = Uri.parse(
         "https://b2bdemo.mrpyazilim.com/api/get_products?token=MTk5MzMxODM1MDYyY2ZlM2ZlNzkxNDc1LjUyODA1NTk2");
     //burada map i yollayarak response ediyor
@@ -40,6 +51,4 @@ class TakeData {
       throw Exception('Failed to load products');
     }
   }
-
-
 }

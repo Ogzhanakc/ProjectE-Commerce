@@ -14,7 +14,12 @@ import 'models/basket_model.dart';
 import 'my_theme.dart';
 
 class MainPageHome extends StatefulWidget {
+  // List<BasketModel>? basketList;
 
+  //MainPageHome({this.basketList});
+
+  static _MainPageHomeState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_MainPageHomeState>();
 
   @override
   State<MainPageHome> createState() => _MainPageHomeState();
@@ -22,18 +27,14 @@ class MainPageHome extends StatefulWidget {
 
 class _MainPageHomeState extends State<MainPageHome> {
   @override
-  void setState(VoidCallback fn) {
-    super.setState(fn);
-  }
-  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        bottomNavigationBar: menu(),
+        bottomNavigationBar: menu(sendBasket),
         body: TabBarView(
           children: [
-            Categories(),
+            Categories(), //   BOŞDEĞİLSE---BOŞSA
             MyBasket(),
             Profile(),
           ],
@@ -43,22 +44,30 @@ class _MainPageHomeState extends State<MainPageHome> {
   }
 }
 
-Widget menu() {
+Widget menu(List basketList) {
   return TabBar(
-    // labelColor: MyTheme().myThemeLight.primaryColor,
-    // unselectedLabelColor: Colors.black,
-    // indicatorSize: TabBarIndicatorSize.tab,
-    // indicatorPadding: EdgeInsets.all(5.0),
-    //indicatorColor: Colors.purple,
     tabs: [
       Tab(
         text: "Kategoriler",
         icon: Icon(Icons.category),
       ),
       Tab(
-        text: "Sepetim",
-        icon: Icon(Icons.shopping_cart),
-      ),
+          text: "Sepetim",
+          icon: basketList.isNotEmpty
+              ? Stack(
+                  children: const [
+                    Icon(Icons.shopping_cart_outlined),
+                    Positioned(
+                      left: 15.0,
+                      child: Icon(
+                        Icons.brightness_1,
+                        size: 10.0,
+                        color: Colors.red,
+                      ),
+                    )
+                  ],
+                )
+              : Icon(Icons.shopping_cart_outlined)),
       Tab(
         text: "Profil",
         icon: Icon(Icons.person),

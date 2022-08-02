@@ -16,7 +16,13 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
-
+String searchText ="";
+late final Future<List<ProductsModel>> _fillList;
+@override
+  void initState() {
+    super.initState();
+    _fillList = TakeData().getProducts(widget.categoryId.toString(), searchText);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +30,7 @@ class _ProductsState extends State<Products> {
         title: const Text("ürünler"),
       ),
       body: FutureBuilder<List<ProductsModel>>(
-        future: TakeData().getProducts(widget.categoryId.toString()),
+        future: _fillList,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var productList = snapshot.data!;

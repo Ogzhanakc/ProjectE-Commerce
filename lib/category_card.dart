@@ -11,7 +11,6 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //Buraya hangi sayfaya gidileceği yazılacak bunun için dinamik sayfa öğrenmelisin
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => Products(categoryId: categoryId!)));
