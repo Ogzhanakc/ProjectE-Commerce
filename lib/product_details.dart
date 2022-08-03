@@ -185,7 +185,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       quantity: quantity.toString()));
                   initialIndexDeterminer = 1;
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MainPage()));
+                      MaterialPageRoute(builder: (context) => MainPageHome()));
                   quantity = 1;
                 },
                 child: Container(

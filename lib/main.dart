@@ -26,6 +26,7 @@ class _MainPageState extends State<MainPage> {
     setState((){
       darkThemeBool = !darkThemeBool;
     });
+
   }
   @override
   Widget build(BuildContext context) {
