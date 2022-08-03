@@ -1,40 +1,25 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
-import 'package:project3/add_comment.dart';
 import 'package:project3/categories.dart';
 import 'package:project3/basket.dart';
 import 'package:project3/product_details.dart';
-import 'package:project3/constants.dart';
-import 'package:project3/products.dart';
 import 'package:project3/profile.dart';
-import 'main_page.dart';
-import 'constants.dart';
-import 'models/basket_model.dart';
-import 'my_theme.dart';
 
-class MainPageHome extends StatefulWidget {
-  // List<BasketModel>? basketList;
+int initialIndexDeterminer = 0;
 
-  //MainPageHome({this.basketList});
+class MainPageHome extends StatelessWidget {
+  const MainPageHome({Key? key}) : super(key: key);
 
-  static _MainPageHomeState? of(BuildContext context) =>
-      context.findAncestorStateOfType<_MainPageHomeState>();
-
-  @override
-  State<MainPageHome> createState() => _MainPageHomeState();
-}
-
-class _MainPageHomeState extends State<MainPageHome> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: initialIndexDeterminer,
       length: 3,
       child: Scaffold(
         bottomNavigationBar: menu(sendBasket),
         body: TabBarView(
+
           children: [
-            Categories(), //   BOŞDEĞİLSE---BOŞSA
+            Categories(),
             MyBasket(),
             Profile(),
           ],
@@ -44,10 +29,13 @@ class _MainPageHomeState extends State<MainPageHome> {
   }
 }
 
+
+
+
 Widget menu(List basketList) {
   return TabBar(
     tabs: [
-      Tab(
+      const Tab(
         text: "Kategoriler",
         icon: Icon(Icons.category),
       ),
@@ -67,8 +55,8 @@ Widget menu(List basketList) {
                     )
                   ],
                 )
-              : Icon(Icons.shopping_cart_outlined)),
-      Tab(
+              : const Icon(Icons.shopping_cart_outlined)),
+      const Tab(
         text: "Profil",
         icon: Icon(Icons.person),
       ),

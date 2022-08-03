@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:project3/category_card.dart';
 
 import 'package:project3/models/categories_model.dart';
+import 'package:project3/products.dart';
+import 'package:project3/search_page.dart';
 import 'package:project3/take_data/take_data.dart';
-import 'product_card.dart';
+
+bool searchPressed = false;
 
 class Categories extends StatefulWidget {
   @override
@@ -28,7 +31,12 @@ class _CategoriesState extends State<Categories> {
         title: Text("Kategoriler"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+                setState((){
+                  searchPressed = true;
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchPage()),);
+                });
+            },
             icon: Icon(Icons.search),
           ),
         ],
@@ -58,7 +66,6 @@ class _CategoriesState extends State<Categories> {
           } else {
             return Center(
                 child: CircularProgressIndicator(
-              color: Colors.black,
             ));
           }
         },

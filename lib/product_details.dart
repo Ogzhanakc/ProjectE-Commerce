@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project3/MainPageHome.dart';
 import 'package:project3/basket.dart';
 import 'package:project3/add_comment.dart';
 import 'package:project3/models/basket_model.dart';
@@ -70,7 +71,7 @@ class _ProductDetailState extends State<ProductDetail> {
               sizedBox(),
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+
                   shape: BoxShape.rectangle,
                 ),
                 child: Column(
@@ -85,7 +86,7 @@ class _ProductDetailState extends State<ProductDetail> {
               sizedBox(),
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+
                   shape: BoxShape.rectangle,
                 ),
                 child: Row(
@@ -93,7 +94,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   children: [
                     const Text(
                       "Miktar",
-                      style: styleWithYellow,
+
                     ),
                     Row(
                       children: [
@@ -121,13 +122,13 @@ class _ProductDetailState extends State<ProductDetail> {
               ),
               sizedBox(),
               Container(
-                color: Colors.white,
+
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       "Hiç Yorum yok",
-                      style: styleWithYellow,
+
                     ),
                     GestureDetector(
                       onTap: () {
@@ -139,11 +140,11 @@ class _ProductDetailState extends State<ProductDetail> {
                         children: const [
                           Text(
                             "Yorum Ekle",
-                            style: styleWithYellow,
+
                           ),
                           Icon(
                             Icons.arrow_forward_ios,
-                            color: customYellow,
+
                           ),
                         ],
                       ),
@@ -182,6 +183,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       price: widget.price,
                       productCode: widget.productCode,
                       quantity: quantity.toString()));
+                  initialIndexDeterminer = 1;
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => MainPage()));
                   quantity = 1;
@@ -189,7 +191,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 child: Container(
                   height: 50,
                   decoration: BoxDecoration(
-                    color: MyTheme().buttonTheme.colorScheme.primary,
+
                     shape: BoxShape.rectangle,
                   ),
                   child: Row(
@@ -198,7 +200,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       Icon(
                         Icons.shopping_cart,
                         size: iconSize,
-                        color: MyTheme().buttonTheme.colorScheme.secondary,
+
                       ),
                       Text(
                         "Sepete Ekle",
@@ -235,7 +237,7 @@ Expanded(
                   margin: const EdgeInsets.only(left: 5),
                   height: 50,
                   decoration: const BoxDecoration(
-                    color: customYellow,
+
                     shape: BoxShape.rectangle,
                   ),
                   child: Row(
@@ -245,11 +247,11 @@ Expanded(
                       Icon(
                         Icons.shopping_bag_outlined,
                         size: iconSize,
-                        color: Colors.white,
+
                       ),
                       Text(
                         "Satın Al",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+
                       )
                     ],
                   ),

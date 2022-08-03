@@ -36,7 +36,7 @@ class _ProductCardState extends State<ProductCard> {
       },
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
+
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -50,7 +50,7 @@ class _ProductCardState extends State<ProductCard> {
             SizedBox(
               height: 8,
             ),
-            Text(widget.productName!,
+            Text(widget.productName!,overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleMedium),
             SizedBox(
               height: 8,

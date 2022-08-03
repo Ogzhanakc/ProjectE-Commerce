@@ -17,14 +17,12 @@ class CategoryCard extends StatelessWidget {
       },
       //Burada resimlerin şekli textin şekli ile oyna
       child: Container(
-          color: Colors.white,
+
           child: Column(
             children: [
               Expanded(
-                  child: Container(
-                      child:
-                          Image.asset("images/categories/" + image! + ".jpg"))),
-              Text(name!),
+                  child: CircleAvatar(backgroundImage: AssetImage("images/categories/${image!}.jpg",),radius: 100,)),
+              Text(name!,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold,fontStyle: FontStyle.normal),),
             ],
           )),
     );

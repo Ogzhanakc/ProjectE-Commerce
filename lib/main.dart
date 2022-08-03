@@ -14,15 +14,23 @@ void main() {
 }
 
 class MainPage extends StatefulWidget {
+
+  static _MainPageState? of(BuildContext context) => context.findAncestorStateOfType<_MainPageState>();
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
+  bool darkThemeBool = false;
+  void switcher(){
+    setState((){
+      darkThemeBool = !darkThemeBool;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: MyTheme().myThemeLight,
+      theme: darkThemeBool ?  MyTheme().myThemeDark : MyTheme().myThemeLight,
       debugShowCheckedModeBanner: false,
       home: MainPageHome(),
     );
